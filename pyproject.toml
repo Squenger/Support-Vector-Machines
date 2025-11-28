@@ -3,7 +3,7 @@ name = "sv-machines"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Aimine Meddeb, Oscar Loriou, Louis Mayonove, Annabelle Lichou"}
+    {name = "Aimine Meddeb, Oscar Loriou, Louis Mayonove"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"

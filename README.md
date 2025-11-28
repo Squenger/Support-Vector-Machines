@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Getting started :hugs:
+=======
+# Getting started 🤗
+>>>>>>> 956b08df965a2f346bcb2ae8d9dbaf21a04c5477
 
 1. Clone this repository in a folder.
 2. Install python and [poetry](https://python-poetry.org/docs/#installation).
@@ -10,7 +14,7 @@ poetry install [--with dev]
 
 **NB:** *The `--with dev` is optional and required only if you need developement libraries.*
 
-# Developpement
+# Developpement :computer:
 
 - To add new libraries to the requirements use poetry. Example:
 
