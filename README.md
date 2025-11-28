@@ -8,4 +8,4 @@
 poetry install [--with dev]
 ```
 
-NB: *The `--with dev` is optional and required only if you need developement libraries.*
+**NB:** *The `--with dev` is optional and required only if you need developement libraries.*
