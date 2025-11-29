@@ -76,6 +76,57 @@ def get_line_dataset(
     return x_vals, y_vals
 
 
+def add_line_outliers(
+    x_data: np.ndarray,
+    y_data: np.ndarray,
+    slope: float,
+    offset: float,
+    epsilon: float,
+    num_outliers: int,
+    outlier_max_distance: float,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Adds outliers to a line dataset.
+
+    Parameters
+    ----------
+    x_data : np.ndarray
+        X values of the dataset points.
+    y_data : np.ndarray
+        Y values of the dataset points.
+    slope: float
+        Slope of the "true" line.
+    offset: float
+        Offset of the "true" line.
+    epsilon: float
+        +/- epsilon band around the "true" line.
+    num_outliers : int
+        Number of outliers to add.
+    outlier_max_distance:  float
+        Maximum distance of the outliers from the line.
+
+    Returns
+    -------
+    np.ndarray
+        X values of the dataset points with outliers.
+    np.ndarray
+        Y values of the dataset points with outliers.
+    np.ndarray
+        Indexes of the outliers in the new dataset.
+    """
+    outliers_indexes = np.random.choice(len(x_data), size=num_outliers, replace=False)
+    y_true_outliers = linear_function(
+        x_data[outliers_indexes], slope=slope, offset=offset
+    )
+    y_outliers = y_true_outliers + np.random.choice(
+        [1, -1], size=num_outliers
+    ) * np.random.uniform(epsilon, outlier_max_distance, num_outliers)
+
+    y_data_with_outliers = y_data.copy()
+    y_data_with_outliers[outliers_indexes] = y_outliers
+
+    return x_data, y_data_with_outliers, outliers_indexes
+
+
 def get_line_plot(
     x_dataset: np.ndarray,
     y_dataset: np.ndarray,
@@ -83,6 +134,7 @@ def get_line_plot(
     offset: float,
     epsilon: float,
     with_true_function: bool = False,
+    outliers_indexes: np.ndarray | None = None,
 ) -> tuple[plt.Figure, plt.Axes]:
     """Returns a matplotlib figure and axes for plotting linear regression results.
 
@@ -133,9 +185,32 @@ def get_line_plot(
         alpha=0.1,
         label="+/-epsilon band",
     )
-    ax.scatter(
-        x_dataset, y_dataset, marker="x", s=5, color="blue", label="Line dataset points"
-    )
+    if outliers_indexes is not None:
+        ax.scatter(
+            x_dataset[outliers_indexes],
+            y_dataset[outliers_indexes],
+            marker="x",
+            s=5,
+            color="orange",
+            label="Line dataset points outside of +/- epsilon band",
+        )
+        ax.scatter(
+            np.delete(x_dataset, outliers_indexes),
+            np.delete(y_dataset, outliers_indexes),
+            marker="x",
+            s=5,
+            color="blue",
+            label="Line dataset points inside +/- epsilon band",
+        )
+    else:
+        ax.scatter(
+            x_dataset,
+            y_dataset,
+            marker="x",
+            s=5,
+            color="blue",
+            label="Line dataset points",
+        )
     fig.tight_layout()
     # fig.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 

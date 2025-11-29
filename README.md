@@ -22,7 +22,7 @@ poetry add matplotlib
 - To automatically reformat code. Use black:
 
 ```bash
-poetry run black sv_machines
+poetry run black sv_machines notebooks
 ```
 
 **NB:** You need to have installed the developpement dependencies too in order to be able to use black. Otherwise it is not installed.

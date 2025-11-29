@@ -21,6 +21,6 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = [
-    "black (>=25.11.0,<26.0.0)",
+    "black[jupyter] (>=25.11.0,<26.0.0)",
     "ipykernel (>=7.1.0,<8.0.0)"
 ]
