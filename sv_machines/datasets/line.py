@@ -112,7 +112,7 @@ def get_line_plot(
     x_line_ordered = np.linspace(min(x_dataset), max(x_dataset), 1000)
     y_true = linear_function(x_line_ordered, slope, offset)
     y_upper_limit = y_true + epsilon
-    y_lower_limit = y_true + offset - epsilon
+    y_lower_limit = y_true - epsilon
 
     fig, ax = plt.subplots(1, 1)
     if with_true_function:
@@ -130,11 +130,11 @@ def get_line_plot(
         y_lower_limit,
         y_upper_limit,
         color="black",
-        alpha=0.2,
+        alpha=0.1,
         label="+/-epsilon band",
     )
     ax.scatter(
-        x_dataset, y_dataset, marker="x", s=8, color="blue", label="Line dataset points"
+        x_dataset, y_dataset, marker="x", s=5, color="blue", label="Line dataset points"
     )
     fig.tight_layout()
     # fig.legend(loc='center left', bbox_to_anchor=(1, 0.5))

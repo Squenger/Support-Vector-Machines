@@ -101,7 +101,7 @@ def get_epsilon_sv_function(
         "epsilon": epsilon,
         "omega": omega.value,
         "b": b.value,
-        "min_val": prob.value,
+        "min_val": 0.5 * prob.value,
     }
 
     print(f"Regression function obtained is y= {omega.value}^T * x + {b.value}")

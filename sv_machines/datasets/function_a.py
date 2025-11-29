@@ -124,7 +124,7 @@ def get_function_a_plot(
         y_lower_limit,
         y_upper_limit,
         color="black",
-        alpha=0.2,
+        alpha=0.1,
         label="+/-epsilon band",
     )
     ax.scatter(

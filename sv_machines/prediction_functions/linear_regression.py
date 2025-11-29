@@ -1,21 +1,29 @@
 """Module returning a prediction function computed using linear regression."""
 
+# Standard library imports
+from typing import Callable
+
 # Third party libraries imports
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 
-def get_y_linear_regression(x_data: np.ndarray, y_data: np.ndarray):
+def get_linear_regression(
+    x_data: np.ndarray, y_data: np.ndarray
+) -> tuple[Callable, dict]:
     """Returns a prediction function based on linear regression.
 
-    Args:
-        x_data (np.ndarray): Input feature data.
-        y_data (np.ndarray): Target output data.
+    Parameters
+    ----------
+    x_data: np.ndarray
+        Input feature data.
+    y_data: np.ndarray
+        Target output data.
 
-    Returns:
+    Returns
+    -------
         function: A function that takes an input array and returns predicted outputs.
     """
-    from sklearn.linear_model import LinearRegression
-
     # Reshape x_data if it's one-dimensional
     if x_data.ndim == 1:
         x_data = x_data.reshape(-1, 1)
@@ -30,4 +38,13 @@ def get_y_linear_regression(x_data: np.ndarray, y_data: np.ndarray):
             x = x.reshape(-1, 1)
         return model.predict(x)
 
-    return prediction_function
+    print(
+        f"Linear regression model coefficients: slope={model.coef_}, intercept={model.intercept_}"
+    )
+
+    model_dict = {
+        "slope": model.coef_,
+        "intercept": model.intercept_,
+    }
+
+    return prediction_function, model_dict
