@@ -21,16 +21,14 @@ def add_prediction_function_to_plot(
     ----------
     x_dataset : np.ndarray
         X values of the dataset points.
-    y_dataset : np.ndarray
-        Y values of the dataset points.
-    prediction_function : Callable
-        A function that takes an input array and returns predicted outputs.
-    plot_title : str
-        Title of the plot.
-    x_label : str
-        Label for the X-axis.
-    y_label : str
-        Label for the Y-axis.
+    x_dataset: np.ndarray
+        x_values of the dataset points.
+    prediction_function: Callable
+        Prediction function to plot.
+    epsilon: float
+        Epsilon value for the margin around the prediction function.
+    prediction_function_label: str
+        Label for the prediction function in the plot legend.
     """
 
     x_regression = np.linspace(min(x_dataset), max(x_dataset), 50)
